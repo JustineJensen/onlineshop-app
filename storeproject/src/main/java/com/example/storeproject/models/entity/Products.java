@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class Products {
     @Id
-    @GeneratedValue
+    @GeneratedValue (strategy = GenerationType.AUTO)
     @Schema(description = "ID of the product,example 1234")
     @Column (name = "product_id",nullable = false)
     private long productId;
@@ -30,7 +30,7 @@ public class Products {
     private double price;
 
     @Column(name = "product category", nullable = false)
-    @Schema(description = "product category", example = "honey or dates")
+    @Schema(description = "Distinguish between honey and dates", example = "honey or dates")
     private String category;
 
     @Column(name = "product image", nullable = false)
