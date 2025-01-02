@@ -26,8 +26,8 @@ public class Order {
     @Schema(description = "Order date",example = "2024-02-12")
     private LocalDateTime orderDate;
 
-    @Schema(description = " Total price of the products")
-    @Column(name="total_price")
+    @Schema(description = " Total price of the products" ,example = "100kr")
+    @Column(name="total_price",nullable = false)
     private double totalPrice;
 
 }
