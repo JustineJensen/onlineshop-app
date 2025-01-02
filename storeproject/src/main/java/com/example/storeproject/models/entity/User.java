@@ -15,7 +15,7 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "user_id",nullable = true)
     @Schema(description = "ID of the user",example = "1234")
-    private long id;
+    private long userId;
 
     @Column(name = "first_name",nullable = false)
     @Schema(description = "Name of user",example = "")
