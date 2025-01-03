@@ -18,11 +18,11 @@ public class User {
     private long userId;
 
     @Column(name = "first_name",nullable = false)
-    @Schema(description = "Name of user",example = "")
+    @Schema(description = "Name of user", example = "John Doe")
     private String userName;
 
     @Column(name = "email",nullable = false)
-    @Schema(description = "Email of the user",example = "justine.jensen@hotmail.com")
+    @Schema(description = "Email of the user", example = "john.doe@example.com")
     private String email;
 
     @Column(name="password",nullable = false)
