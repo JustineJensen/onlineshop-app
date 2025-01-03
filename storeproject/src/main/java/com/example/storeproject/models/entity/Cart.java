@@ -32,9 +32,11 @@ public class Cart{
     private boolean checkedOut;
 
     @Column(name = "created_at",nullable = false)
+    @Schema(description = "The date when the item was added in the cart")
     private LocalDateTime createdAt;
 
     @Column(name ="updated_at",nullable = false)
+    @Schema(description = "The date when the item was updated in the cart")
     private LocalDateTime updatedAt;
 
     @OneToMany(mappedBy = "cart", fetch = FetchType.LAZY)
