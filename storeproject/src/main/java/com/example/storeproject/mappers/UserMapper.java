@@ -15,36 +15,39 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring")
 public abstract class UserMapper {
 
+    // Convert User to UserDTO
     @Mapping(target = "adminId", source = "admin.userId")
     public abstract UserDTO userToUserDTO(User user);
 
+    // Convert UserPostDTO to User, with admin passed separately
     @Mapping(target = "firstName", source = "userPostDTO.firstName")
     @Mapping(target = "lastName", source = "userPostDTO.lastName")
     @Mapping(target = "email", source = "userPostDTO.email")
     @Mapping(target = "role", source = "userPostDTO.role")
-    @Mapping(target = "admin", source = "userPostDTO.admin")
+    @Mapping(target = "admin", source = "admin")
     @Mapping(target = "userId", ignore = true)
     public abstract User userPostDTOToUser(UserPostDTO userPostDTO, User admin);
 
-    // admin will not be updated directly
+    // Convert UserUpdateDTO to User, admin is not updated
     @Mapping(target = "admin", ignore = true)
     public abstract User userUpdateDTOToUser(UserUpdateDTO userUpdateDTO);
 
+    // Map List<User> to List<UserDTO>
     public abstract List<UserDTO> userToUserDtoList(List<User> users);
 
+    // Extract userIds
     @Named("mapSubordinatesToIds")
     public Set<Long> mapSubordinatesToIds(Set<User> source) {
-        if (source == null)
-            return null;
+        if (source == null) return null;
         return source.stream()
                 .map(User::getUserId)
                 .collect(Collectors.toSet());
     }
+
+    // Create Users with Ids only
     @Named("mapSubordinatesToUsers")
     public Set<User> mapSubordinatesToUsers(Set<Long> source) {
-        if (source == null) {
-            return null;
-        }
+        if (source == null) return null;
         return source.stream().map(userId -> {
             User user = new User();
             user.setUserId(userId);
