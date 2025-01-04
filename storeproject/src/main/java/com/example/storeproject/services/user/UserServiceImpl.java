@@ -19,7 +19,6 @@ public class UserServiceImpl implements UserService {
         this.userMapper = userMapper;
     }
 
-
     @Override
     public User findById(Long id) {
         return userRepository.findById(id).orElseThrow(()->new RuntimeException("Not found"));
@@ -40,7 +39,6 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user);
 
     }
-
     @Override
     public void deleteById(Long id) {
         userRepository.deleteById(id);

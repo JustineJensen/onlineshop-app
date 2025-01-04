@@ -1,5 +1,6 @@
 package com.example.storeproject.models.entity;
 
+import com.example.storeproject.utils.enumerators.AuthRole;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -17,11 +18,6 @@ public class User {
     @Schema(description = "ID of the user",example = "1234")
     private long userId;
 
-     @ManyToOne(fetch = FetchType.LAZY)
-     @JoinColumn(name = "admin_id", nullable = false)
-     @Schema(description = "Admin of the users")
-     private  User admin;
-
     @Column(name = "first_name",nullable = false)
     @Schema(description = "First of user", example = "John Doe")
     private String firstName;
@@ -37,4 +33,9 @@ public class User {
     @Column(name = "user_role",nullable = false)
     @Schema(description = "user role",example = "Admin role")
     private String role;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "auth_role", nullable = false)
+    @Schema(description = "The authorization role of the user", example = "AuthRole.ADMIN")
+    private AuthRole authRole;
 }

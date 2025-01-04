@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 public abstract class UserMapper {
 
     // Convert User to UserDTO
-    @Mapping(target = "adminId", source = "admin.userId")
+    @Mapping(target = "authRole", source = "authRole")
     public abstract UserDTO userToUserDTO(User user);
 
     // Convert UserPostDTO to User, with admin passed separately
@@ -24,13 +24,10 @@ public abstract class UserMapper {
     @Mapping(target = "lastName", source = "userPostDTO.lastName")
     @Mapping(target = "email", source = "userPostDTO.email")
     @Mapping(target = "role", source = "userPostDTO.role")
-    @Mapping(target = "admin", source = "admin")
+    @Mapping(target = "authRole", source = "userPostDTO.authRole")
     @Mapping(target = "userId", ignore = true)
     public abstract User userPostDTOToUser(UserPostDTO userPostDTO, User admin);
 
-    // Convert UserUpdateDTO to User, admin is not updated
-    @Mapping(target = "admin", ignore = true)
-    public abstract User userUpdateDTOToUser(UserUpdateDTO userUpdateDTO);
 
     // Map List<User> to List<UserDTO>
     public abstract List<UserDTO> userToUserDtoList(List<User> users);
