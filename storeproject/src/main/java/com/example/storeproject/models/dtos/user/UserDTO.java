@@ -3,10 +3,11 @@ package com.example.storeproject.models.dtos.user;
 import lombok.Data;
 
 @Data
-public class UserUpdateDto {
+public class UserDTO {
     private long userId;
-    private String userName;
+    private String firstName;
+    private String lastName;
     private String email;
-    private String password;
+    private long adminId;
     private String role;
 }

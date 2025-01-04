@@ -17,19 +17,24 @@ public class User {
     @Schema(description = "ID of the user",example = "1234")
     private long userId;
 
+     @ManyToOne(fetch = FetchType.LAZY)
+     @JoinColumn(name = "admin_id", nullable = false)
+     @Schema(description = "Admin of the users")
+     private  User admin;
+
     @Column(name = "first_name",nullable = false)
-    @Schema(description = "Name of user", example = "John Doe")
-    private String userName;
+    @Schema(description = "First of user", example = "John Doe")
+    private String firstName;
+
+    @Column(name = "last_name",nullable = false)
+    @Schema(description = "last of user", example ="Jensen")
+    private String lastName;
 
     @Column(name = "email",nullable = false)
     @Schema(description = "Email of the user", example = "john.doe@example.com")
     private String email;
 
-    @Column(name="password",nullable = false)
-    @Schema(description = "user's password")
-    private String password;
-
-    @Column(name = "role",nullable = false)
-    @Schema(description = "user role",example = "Admin")
+    @Column(name = "user_role",nullable = false)
+    @Schema(description = "user role",example = "Admin role")
     private String role;
 }
