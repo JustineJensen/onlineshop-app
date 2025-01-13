@@ -10,12 +10,12 @@ import lombok.Setter;
 @Schema(description ="Represents a product")
 @Getter
 @Setter
-public class Products {
+public class Product {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     @Schema(description = "ID of the product,example 1234")
     @Column (name = "product_id",nullable = false)
-    private long productId;
+    private Long productId;
 
     @Column(name = "product_name", nullable = false)
     @Schema(description = "Name of the product")
