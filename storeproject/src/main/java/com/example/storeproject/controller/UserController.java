@@ -74,15 +74,25 @@ public class UserController {
     })
     @PostMapping
     @CrossOrigin
-    public  ResponseEntity<Void>createNewUser(@RequestBody UserPostDTO userPostDTO){
-    User user = new User();
-    user.setEmail(userPostDTO.getEmail());
-    user.setFirstName(userPostDTO.getFirstName());
-    user.setLastName(userPostDTO.getLastName());
-    user.setAuthRole(userPostDTO.getAuthRole()!= null ? userPostDTO.getAuthRole(): AuthRole.USER );
-    userService.add(user);
-    return  ResponseEntity.ok().build();
-}
+    public  ResponseEntity<Void>createNewUser(@RequestBody UserPostDTO userPostDTO) {
+        try {
+            User user = new User();
+            user.setEmail(userPostDTO.getEmail());
+            user.setFirstName(userPostDTO.getFirstName());
+            user.setLastName(userPostDTO.getLastName());
+            user.setAuthRole(userPostDTO.getAuthRole() != null ? userPostDTO.getAuthRole() : AuthRole.USER);
+            userService.add(user);
+            return ResponseEntity.ok().build();
+        } catch (RuntimeException ex) {
+            System.err.println("Error creating User" + ex.getMessage());
+
+            return  ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }catch (Exception ex){
+            System.err.println("Unexpected error:" + ex.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
+    }
     @Operation(summary = "Update an existing user")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "No content", content = @Content),
@@ -103,7 +113,12 @@ public class UserController {
     userService.update(existingUser);
  return  ResponseEntity.noContent().build();
 }
-
+    @Operation(summary = "Delete a User by its ID")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "No content", content = @Content),
+            @ApiResponse(responseCode = "400", description = "Malformed request", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
+            @ApiResponse(responseCode = "404", description = "Not found", content = @Content(mediaType = "application/json", schema = @Schema(implementation = ApiErrorResponse.class))),
+    })
 @DeleteMapping("/{userId}")
  public ResponseEntity<Void>deleteUser(@PathVariable Long userId){
     User user = userService.findById(userId);

@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 public class Product {
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Schema(description = "ID of the product,example 1234")
     @Column (name = "product_id",nullable = false)
     private Long productId;
