@@ -21,19 +21,19 @@ public class Product {
     @Schema(description = "Name of the product")
     private String productName;
 
-    @Column(name = "product description", nullable = false)
+    @Column(name = "product_description", nullable = false)
     @Schema(description = "information about the product")
     private String description;
 
-    @Column(name = "product price", nullable = false)
+    @Column(name = "product_price", nullable = false)
     @Schema(description = "Price of the product")
     private double price;
 
-    @Column(name = "product category", nullable = false)
+    @Column(name = "product_category", nullable = false)
     @Schema(description = "Distinguish between honey and dates", example = "honey or dates")
     private String category;
 
-    @Column(name = "product image", nullable = false)
+    @Column(name = "product_image", nullable = false)
     @Schema(description = "product image")
     private String imageUrl;
 
