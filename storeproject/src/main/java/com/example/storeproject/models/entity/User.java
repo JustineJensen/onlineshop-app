@@ -13,29 +13,26 @@ import lombok.Setter;
 @Table(name ="users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id",nullable = true)
-    @Schema(description = "ID of the user",example = "1234")
-    private long userId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id", nullable = false)
+    @Schema(description = "ID of the user", example = "1234")
+    private Long userId;
 
-    @Column(name = "first_name",nullable = false)
-    @Schema(description = "First of user", example = "John Doe")
+    @Column(name = "first_name", nullable = false)
+    @Schema(description = "First name of user", example = "John Doe")
     private String firstName;
 
-    @Column(name = "last_name",nullable = false)
-    @Schema(description = "last of user", example ="Jensen")
+    @Column(name = "last_name", nullable = false)
+    @Schema(description = "Last name of user", example = "Jensen")
     private String lastName;
 
-    @Column(name = "email",nullable = false)
+    @Column(name = "email", nullable = false,unique = true)
     @Schema(description = "Email of the user", example = "john.doe@example.com")
     private String email;
-
-    @Column(name = "user_role",nullable = false)
-    @Schema(description = "user role",example = "Admin role")
-    private String role;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "auth_role", nullable = false)
     @Schema(description = "The authorization role of the user", example = "AuthRole.ADMIN")
     private AuthRole authRole;
+
 }

@@ -15,24 +15,20 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring")
 public abstract class UserMapper {
 
-    // Convert User to UserDTO
     @Mapping(target = "authRole", source = "authRole")
     public abstract UserDTO userToUserDTO(User user);
 
-    // Convert UserPostDTO to User, with admin passed separately
     @Mapping(target = "firstName", source = "userPostDTO.firstName")
     @Mapping(target = "lastName", source = "userPostDTO.lastName")
     @Mapping(target = "email", source = "userPostDTO.email")
-    @Mapping(target = "role", source = "userPostDTO.role")
     @Mapping(target = "authRole", source = "userPostDTO.authRole")
     @Mapping(target = "userId", ignore = true)
     public abstract User userPostDTOToUser(UserPostDTO userPostDTO, User admin);
 
 
-    // Map List<User> to List<UserDTO>
     public abstract List<UserDTO> userToUserDtoList(List<User> users);
 
-    // Extract userIds
+
     @Named("mapSubordinatesToIds")
     public Set<Long> mapSubordinatesToIds(Set<User> source) {
         if (source == null) return null;
@@ -42,7 +38,7 @@ public abstract class UserMapper {
     }
 
     // Create Users with Ids only
-    @Named("mapSubordinatesToUsers")
+    @Named("mapSubordinatesToUser")
     public Set<User> mapSubordinatesToUsers(Set<Long> source) {
         if (source == null) return null;
         return source.stream().map(userId -> {

@@ -20,8 +20,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findById(Long id) {
-        return userRepository.findById(id).orElseThrow(()->new RuntimeException("Not found"));
+    public User findById(Long userId) {
+        return userRepository.findById(userId).orElseThrow(()->new RuntimeException("Not found"));
     }
 
     @Override
@@ -31,6 +31,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User add(User user) {
+        System.out.println("saving user"+user);
         return userRepository.save(user);
     }
 
@@ -46,6 +47,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return Optional.empty();
+        return userRepository.findByEmail(email);
     }
 }
